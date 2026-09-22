@@ -4,9 +4,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <h2>Posts</h2>
+
+    <div style="margin-bottom: 10px;">
+        <input id="searchInput" type="text" placeholder="Search by title" />
+        <select id="sortField">
+            <option value="id">Sort by ID</option>
+            <option value="title">Sort by Title</option>
+            <option value="body">Sort by Body</option>
+        </select>
+        <select id="sortOrder">
+            <option value="asc">Ascending</option>
+            <option value="desc">Descending</option>
+        </select>
+    </div>
+
     <table id="myTable" border="1">
         <tr>
             <th>ID</th>
@@ -14,6 +29,11 @@
             <th>Body</th>
         </tr>
     </table>
+
+    <div style="margin-top: 10px;">
+        <button id="prevBtn" type="button">Previous</button>
+        <button id="nextBtn" type="button">Next</button>
+    </div>
 
     <script src="script.js"></script>
 </body>
