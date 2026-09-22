@@ -1,0 +1,26 @@
+table {
+    border-collapse: collapse;
+    width: 100%;
+    max-width: 1200px;
+    table-layout: fixed;
+}
+
+th, td {
+    border: 1px solid #333;
+    padding: 10px;
+    text-align: left;
+    vertical-align: top;
+    word-wrap: break-word;
+}
+
+th:nth-child(1), td:nth-child(1) {
+    width: 8%;
+}
+
+th:nth-child(2), td:nth-child(2) {
+    width: 22%;
+}
+
+th:nth-child(3), td:nth-child(3) {
+    width: 70%;
+}
