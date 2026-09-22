@@ -8,7 +8,6 @@
 </head>
 <body>
     <h2>Posts</h2>
-
     <div>
         <input id="searchInput" type="text" placeholder="Search by title" />
         <select id="sortField">
@@ -20,6 +19,7 @@
             <option value="asc">Ascending</option>
             <option value="desc">Descending</option>
         </select>
+        <button id="addItemBtn" type="button">Add Item</button>
     </div>
 
     <table id="myTable" border="1">
@@ -33,6 +33,30 @@
     <div style="margin-top: 10px;">
         <button id="prevBtn" type="button">Previous</button>
         <button id="nextBtn" type="button">Next</button>
+    </div>
+
+    <div id="modalOverlay" class="modal-overlay hidden">
+        <div class="modal-content">
+            <h3>Add New Post</h3>
+            <form id="addItemForm" novalidate>
+                <div class="form-row">
+                    <label for="titleInput">Title</label>
+                    <input id="titleInput" type="text" />
+                    <span class="error-message" id="titleError"></span>
+                </div>
+
+                <div class="form-row">
+                    <label for="bodyInput">Body</label>
+                    <textarea id="bodyInput" rows="4"></textarea>
+                    <span class="error-message" id="bodyError"></span>
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit">Save</button>
+                    <button type="button" id="cancelBtn">Cancel</button>
+                </div>
+            </form>
+        </div>
     </div>
 
     <script src="script.js"></script>

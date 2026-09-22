@@ -1,4 +1,4 @@
-const itemsPerPage = 5;
+let itemsPerPage = 5;
 let currentPage = 1;
 let allPosts = [];
 
@@ -8,6 +8,66 @@ const nextBtn = document.getElementById('nextBtn');
 const searchInput = document.getElementById('searchInput');
 const sortField = document.getElementById('sortField');
 const sortOrder = document.getElementById('sortOrder');
+const addItemBtn = document.getElementById('addItemBtn');
+const modalOverlay = document.getElementById('modalOverlay');
+const cancelBtn = document.getElementById('cancelBtn');
+const addItemForm = document.getElementById('addItemForm');
+const titleInput = document.getElementById('titleInput');
+const bodyInput = document.getElementById('bodyInput');
+const titleError = document.getElementById('titleError');
+const bodyError = document.getElementById('bodyError');
+
+function setError(field, message) {
+    const errorElement = field === 'title' ? titleError : bodyError;
+    errorElement.textContent = message;
+}
+
+function clearErrors() {
+    titleError.textContent = '';
+    bodyError.textContent = '';
+}
+
+function validateTitle(value) {
+    const trimmed = value.trim();
+
+    if (!trimmed) {
+        return 'Title is required.';
+    }
+
+    if (/\d/.test(trimmed)) {
+        return 'Title cannot contain digits.';
+    }
+
+    if (trimmed.length > 30) {
+        return 'Title must be 30 characters or fewer.';
+    }
+
+    return '';
+}
+
+function validateBody(value) {
+    const trimmed = value.trim();
+
+    if (!trimmed) {
+        return 'Body is required.';
+    }
+
+    if (/\d/.test(trimmed)) {
+        return 'Body cannot contain digits.';
+    }
+
+    return '';
+}
+
+function openModal() {
+    modalOverlay.classList.remove('hidden');
+}
+
+function closeModal() {
+    modalOverlay.classList.add('hidden');
+    addItemForm.reset();
+    clearErrors();
+}
 
 function parseStateFromUrl() {
     const params = new URLSearchParams(window.location.search);
@@ -175,6 +235,44 @@ nextBtn.addEventListener('click', () => {
         currentPage++;
         renderTable();
     }
+});
+
+addItemBtn.addEventListener('click', openModal);
+cancelBtn.addEventListener('click', closeModal);
+modalOverlay.addEventListener('click', (event) => {
+    if (event.target === modalOverlay) {
+        closeModal();
+    }
+});
+
+addItemForm.addEventListener('submit', (event) => {
+    event.preventDefault();
+
+    const titleValue = titleInput.value;
+    const bodyValue = bodyInput.value;
+
+    const titleMessage = validateTitle(titleValue);
+    const bodyMessage = validateBody(bodyValue);
+
+    setError('title', titleMessage);
+    setError('body', bodyMessage);
+
+    if (titleMessage || bodyMessage) {
+        return;
+    }
+
+    const latestId = allPosts.reduce((max, post) => Math.max(max, Number(post.id) || 0), 0);
+
+    const newPost = {
+        id: latestId + 1,
+        title: titleValue.trim(),
+        body: bodyValue.trim()
+    };
+
+    allPosts.unshift(newPost);
+    currentPage = 1;
+    renderTable();
+    closeModal();
 });
 
 window.addEventListener('popstate', () => {
