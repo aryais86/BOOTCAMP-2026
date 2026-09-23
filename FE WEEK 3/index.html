@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Treasury Transaction Manager</h1>
+
+    <label for="sortField">Sort by:</label>
+    <select id="sortField">
+        <option value="amount">Amount</option>
+        <option value="date">Date</option>
+        <option value="customerName">Customer</option>
+    </select>
+
+    <label for="sortAlgorithm">Algorithm:</label>
+    <select id="sortAlgorithm">
+        <option value="bubble">Bubble Sort</option>
+        <option value="merge">Merge Sort</option>
+    </select>
+    <br>
+    <br>
+    <input type="text" id="searchCustomerInput" placeholder="Search by Customer Name">
+    <input type="text" id="searchIDInput" placeholder="Search by Customer ID">
+    <table id="myTable" border="1">
+        <tr>
+            <th>ID</th>
+            <th>Customer</th>
+            <th>Amount</th>
+            <th>Date</th>
+            <th>Type</th>
+        </tr>
+    </table>
+    <script src="script.js"></script>
+</body>
+</html>
